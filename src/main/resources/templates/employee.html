@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+
+<html lang="en" xmlns:th=”www.thymeleaf.org”
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Untitled</title>
+    <meta charset="utf-8" />
+
+    <div th:replace="base :: headerfg"></div>
+</head>
+
+<body class="is-preload">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header -->
+    <header id="header">
+
+        <!-- Logo -->
+        <div class="logo">
+            <a th:href="@{home}">
+                <img src="http://108.48.50.58:6723/Site/images/logo.png" height="200" width="200"/>
+
+            </a>
+        </div>
+        <!-- Nav -->
+        <nav id="nav">
+            <ul>
+                <li class="current"><a th:href="@{home}">Home</a></li>
+
+                <li sec:authorize="isAuthenticated()" ><a class="nav-link" th:href="@{/employee}"> Profile </a></li>
+                <li sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{listemployees}"> View Employees </a></li>
+                <li sec:authorize="!isAuthenticated()"><a class="nav-link" th:href="@{/login}">Login</a></li>
+                <li sec:authorize="hasRole('ADMIN')"> <a class="nav-link" th:href="@{register}"> Add New Employee </a></li>
+                <li sec:authorize="hasRole('ADMIN')"> <a class="nav-link"  th:href="@{departmentform}"> Add New DPT </a></li>
+                <li sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{/logout}">Logout</a>  </li>
+
+            </ul>
+        </nav>
+
+    </header>
+
+    <!-- Section -->
+    <section id="one" class="main alt">
+        <header class="accent1">
+            <h3> Welcome [[${employee.lastName}]] !! </h3>
+            <table>
+                <td>
+                    <h4> User Name </h4>
+                    <p> [[${employee.firstName}]] [[${employee.lastName}]] </p>
+                </td>
+                <td>
+                    <h4> Email Address </h4>
+                    <p th:text="${employee.email}"></p>
+                </td>
+                <td>
+                    <h4> Phone Number: </h4>
+                    <p th:text="${employee.phoneNumber}"></p>
+                </td>
+            </table>
+
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Logout"/>
+
+                <a th:href="@{/update/{id} (id=${employee.id})}" class="button"> Update </a>
+
+            </form>
+
+        </header>
+        <div class="inner alt">
+            <div class="content">
+
+                <div class="row gtr-200">
+                    <div class="col-6 col-12-medium">
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <div th:replace="base :: footernote"> </div>
+
+</div>
+
+<!-- Scripts -->
+
+<div th:replace="base :: footerfg"></div>
+
+</body>
+</html>

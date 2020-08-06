@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+
+<html lang="en" xmlns:th=”www.thymeleaf.org”
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Untitled</title>
+    <meta charset="utf-8"/>
+    <div th:replace="base :: headerfg"> </div>
+</head>
+<body class="is-preload">
+<!-- Wrapper -->
+<div id="wrapper">
+    <!-- Header -->
+    <header id="header" class="alt">
+        <!-- Logo -->
+        <div class="logo">
+            <a href="index.html">
+                <img src="http://108.48.50.58:6723/Site/images/logo.png" height="200" width="200"/>
+            </a>
+        </div>
+
+        <!-- Nav -->
+
+        <nav id="nav">
+            <ul>
+                <li class="current"><a th:href="@{home}">Home</a></li>
+
+                <li sec:authorize="isAuthenticated()" ><a class="nav-link" th:href="@{/employee}"> Profile </a></li>
+                <li sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{listemployees}"> View Employees </a></li>
+                <li sec:authorize="!isAuthenticated()"><a class="nav-link" th:href="@{/login}">Login</a></li>
+                <li sec:authorize="hasRole('ADMIN')"> <a class="nav-link" th:href="@{register}"> Add New Employee </a></li>
+                <li sec:authorize="hasRole('ADMIN')"> <a class="nav-link"  th:href="@{departmentform}"> Add New DPT </a></li>
+                <li sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{/logout}">Logout</a>  </li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Nav -- END ---->
+
+
+    <!-- Banner -->
+
+    <section id="banner">
+        <div class="content primary">
+            <header>
+                <h1> SyconBitTechNetwork <br/>
+                    Business & Residential Technology Service </h1>
+                <p> Maryland, United States </p>
+            </header>
+            <ul class="actions special">
+                <li><a href="https://calendly.com/syconbittechnetwork/30min?month=2020-08"
+                       class="button large wide scrolly">Schedule a Consulting </a></li>
+            </ul>
+
+        </div>
+        <div class="content secondary">
+            <div class="inner">
+                <div class="features">
+                    <section>
+
+                        <span class="icon fa-gem major"></span>
+                        <h3> Information Technology </h3>
+                        <p> Information Technology Department  </p>
+                    </section>
+                    <section>
+                        <span class="icon fa-gem major"></span>
+                        <h3> Engineering  </h3>
+                        <p> Engineering Department  </p>
+                    </section>
+                    <section>
+                        <span class="icon solid fa-chart-line major"></span>
+                        <h3> Accounting </h3>
+                        <p> Accounting Department  </p>
+                    </section>
+                    <section>
+                        <span class="icon solid fa-camera-retro major"></span>
+                        <h3> Sales  </h3>
+                        <p> Sales Department </p>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <video src="http://108.48.50.58:6723/Site/images/banner.mp4"></video>
+    </section>
+
+</div>
+</div>
+</div>
+</section>
+
+<div th:replace="base :: footernote"></div>
+
+</div>
+
+<!-- Footer and Scripts -->
+
+<div th:replace="base :: footerfg"></div>
+
+
+</body>
+</html>
